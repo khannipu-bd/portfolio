@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ashikur Rahman Khan Nipu | Jr. Flutter Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Glow */
+    .bg-glow {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 10%;
+      background: rgba(11, 15, 25, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    /* Sections Layout */
+    section {
+      padding: 7rem 10% 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      width: fit-content;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Buttons & Links */
+    .hero-btn-group {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      color: #0b0f19;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+      color: #ffffff;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      box-shadow: none;
+    }
+    .btn-secondary:hover {
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+      box-shadow: none;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+      color: #f8fafc;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50%;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8, transparent);
+      border-radius: 2px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: rgba(19, 28, 46, 0.6);
+      padding: 1.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .skill-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    .skill-card h4 {
+      color: #38bdf8;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+    .skill-card p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: rgba(19, 28, 46, 0.6);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+    .project-card h3 {
+      font-size: 1.5rem;
+      color: #f1f5f9;
+      margin-bottom: 0.8rem;
+    }
+    .project-card p {
+      color: #94a3b8;
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+    .tag {
+      background: #1e293b;
+      color: #38bdf8;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    /* Contact Section */
+    .contact-card {
+      background: rgba(19, 28, 46, 0.6);
+      padding: 3rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+    }
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .quick-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.8rem;
+    }
+    .contact-badge {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .contact-badge:hover {
+      color: #38bdf8;
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-2px);
+    }
+    .resume-badge {
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #a855f7;
+    }
+    .resume-badge:hover {
+      color: #ffffff;
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      background: #070a12;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero h2 { font-size: 1.4rem; }
+      header { padding: 1rem 5%; }
+      section { padding: 5rem 5% 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="logo">A R Khan Nipu</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="about">
+    <div class="badge">🚀 Seeking Internship</div>
+    <h1>Hi, I'm <span>Ashikur Rahman Khan Nipu</span></h1>
+    <h2>Jr. Flutter & Cross-Platform Developer</h2>
+    <p>Specializing in Clean Architecture, Provider & Riverpod state management, and high-performance cross-platform mobile apps. Focused on zero-lag user experiences and scalable software design.</p>
+    <div class="hero-btn-group">
+      <a href="#projects" class="btn">View Case Studies</a>
+      <a href="https://github.com/khannipu-bd" target="_blank" class="btn btn-secondary">GitHub Profile 🔗</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Core Tech</h4>
+        <p>Flutter, Dart, Clean Architecture, OOP</p>
+      </div>
+      <div class="skill-card">
+        <h4>State Management</h4>
+        <p>Provider, Riverpod, StateNotifier</p>
+      </div>
+      <div class="skill-card">
+        <h4>Backend & Data</h4>
+        <p>Firebase, Firestore, REST APIs, Hive DB</p>
+      </div>
+      <div class="skill-card">
+        <h4>DevOps & Tools</h4>
+        <p>Git, GitHub, VS Code, Postman</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div>
+          <h3>Gym Management System</h3>
+          <p>An enterprise-level fitness management application built with Clean Architecture, local offline persistence, dynamic user states, and secure authentication.</p>
+          <div class="tech-stack">
+            <span class="tag">Flutter</span>
+            <span class="tag">Riverpod</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">REST API</span>
+          </div>
+        </div>
+        <a href="https://github.com/khannipu-bd/my_gym" target="_blank" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center;">View Repository ↗</a>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div>
+          <h3>SkyFlow (Weather App)</h3>
+          <p>Real-time weather forecast engine featuring custom dynamic visualizers, offline search caching, dynamic geolocation, and API polling.</p>
+          <div class="tech-stack">
+            <span class="tag">Flutter</span>
+            <span class="tag">Provider</span>
+            <span class="tag">OpenWeather API</span>
+            <span class="tag">CustomPaint</span>
+          </div>
+        </div>
+        <a href="https://github.com/khannipu-bd/sky_flow_weathers" target="_blank" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center;">View Repository ↗</a>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div>
+          <h3>TaskEase 🚀</h3>
+          <p>TaskEase is a clean, modern, and feature-first Task Management application developed using Flutter with persistent storage.</p>
+          <div class="tech-stack">
+            <span class="tag">Flutter</span>
+            <span class="tag">Riverpod</span>
+            <span class="tag">Clean Architecture</span>
+            <span class="tag">Persistent Storage</span>
+          </div>
+        </div>
+        <a href="https://github.com/khannipu-bd/easy-task-app" target="_blank" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center;">View Repository ↗</a>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div>
+          <h3>Explore Ease 🗺️</h3>
+          <p>A modern Flutter-based map and navigation app leveraging Clean Architecture for precise real-time GPS tracking, reverse-geocoding, and OSRM route calculations.</p>
+          <div class="tech-stack">
+            <span class="tag">Flutter</span>
+            <span class="tag">Clean Architecture</span>
+            <span class="tag">OpenStreetMap</span>
+            <span class="tag">Nominatim API</span>
+            <span class="tag">OSRM Routing API</span>
+          </div>
+        </div>
+        <a href="https://github.com/khannipu-bd/explore_ease" target="_blank" class="btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem; text-align: center;">View Repository ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Enhanced Contact Section -->
+  <section id="contact">
+    <div class="contact-card">
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">Let's Build Something Great Together</h2>
+      <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.05rem;">
+        Are you looking for a dedicated <strong>Jr. Flutter Developer</strong> who values clean code, responsive UI, and scalable architecture? I'm currently open for <strong>Internship & Full-time opportunities</strong>. Let's talk!
+      </p>
+
+      <!-- Main Action Buttons -->
+      <div class="contact-buttons">
+        <a href="mailto:khannipu.bd@gmail.com" class="btn">
+          📩 Send an Email
+        </a>
+        <a href="https://linkedin.com/in/khannipu-bd" target="_blank" class="btn btn-secondary">
+          💼 Connect on LinkedIn
+        </a>
+      </div>
+
+      <!-- Quick Social & Direct Contact Badges -->
+      <div class="quick-contacts">
+        <a href="https://github.com/khannipu-bd" target="_blank" class="contact-badge">
+          💻 GitHub Profile
+        </a>
+        <a href="https://wa.me/8801305375955" target="_blank" class="contact-badge">
+          💬 WhatsApp
+        </a>
+        <a href="YOUR_RESUME_LINK_HERE" target="_blank" class="contact-badge resume-badge">
+          📄 Download Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Ashikur Rahman Khan Nipu. Built for scalable cross-platform applications.</p>
+  </footer>
+
+</body>
+</html>
